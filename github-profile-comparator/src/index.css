@@ -1,0 +1,577 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-gh-bg: #06090f;
+  --color-gh-bg-secondary: #0a0f1a;
+  --color-gh-card: rgba(14, 20, 33, 0.7);
+  --color-gh-card-solid: #0e1421;
+  --color-gh-border: rgba(56, 68, 94, 0.4);
+  --color-gh-border-hover: rgba(88, 166, 255, 0.3);
+  --color-gh-text: #c9d1d9;
+  --color-gh-text-secondary: #7d8590;
+  --color-gh-accent: #58a6ff;
+  --color-gh-accent-bright: #79c0ff;
+  --color-gh-green: #3fb950;
+  --color-gh-green-bright: #56d364;
+  --color-gh-purple: #bc8cff;
+  --color-gh-purple-bright: #d2a8ff;
+  --color-gh-orange: #d29922;
+  --color-gh-pink: #f778ba;
+  --color-gh-red: #f85149;
+  --color-gh-cyan: #39d2c0;
+  --color-gh-yellow: #e3b341;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(56, 68, 94, 0.5) transparent;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+  background-color: #06090f;
+  color: #c9d1d9;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ================================
+   ANIMATED GRADIENT MESH BACKGROUND
+   ================================ */
+.gradient-mesh {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.gradient-mesh::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  left: -20%;
+  width: 60%;
+  height: 60%;
+  background: radial-gradient(ellipse, rgba(88, 166, 255, 0.08) 0%, transparent 70%);
+  animation: meshFloat1 20s ease-in-out infinite;
+}
+
+.gradient-mesh::after {
+  content: '';
+  position: absolute;
+  bottom: -20%;
+  right: -15%;
+  width: 55%;
+  height: 55%;
+  background: radial-gradient(ellipse, rgba(188, 140, 255, 0.06) 0%, transparent 70%);
+  animation: meshFloat2 25s ease-in-out infinite;
+}
+
+.gradient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.4;
+  animation: orbFloat 15s ease-in-out infinite;
+}
+
+.gradient-orb-1 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(88, 166, 255, 0.12), transparent 70%);
+  top: 10%;
+  left: 20%;
+  animation-delay: 0s;
+}
+
+.gradient-orb-2 {
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(188, 140, 255, 0.1), transparent 70%);
+  top: 50%;
+  right: 15%;
+  animation-delay: -5s;
+}
+
+.gradient-orb-3 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(63, 185, 80, 0.06), transparent 70%);
+  bottom: 10%;
+  left: 40%;
+  animation-delay: -10s;
+}
+
+@keyframes meshFloat1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(10%, 5%) scale(1.1); }
+  66% { transform: translate(-5%, 10%) scale(0.95); }
+}
+
+@keyframes meshFloat2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-8%, -5%) scale(1.05); }
+  66% { transform: translate(5%, -8%) scale(1.1); }
+}
+
+@keyframes orbFloat {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(30px, -20px); }
+  50% { transform: translate(-20px, 30px); }
+  75% { transform: translate(15px, 15px); }
+}
+
+/* ================================
+   FLOATING PARTICLES
+   ================================ */
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  background: rgba(88, 166, 255, 0.3);
+  animation: particleFloat linear infinite;
+}
+
+@keyframes particleFloat {
+  0% {
+    transform: translateY(100vh) scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-20vh) scale(1);
+    opacity: 0;
+  }
+}
+
+/* ================================
+   GLASSMORPHISM
+   ================================ */
+.glass {
+  background: rgba(14, 20, 33, 0.6);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(56, 68, 94, 0.3);
+}
+
+.glass-strong {
+  background: rgba(14, 20, 33, 0.8);
+  backdrop-filter: blur(30px) saturate(200%);
+  -webkit-backdrop-filter: blur(30px) saturate(200%);
+  border: 1px solid rgba(56, 68, 94, 0.4);
+}
+
+.glass-subtle {
+  background: rgba(14, 20, 33, 0.4);
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  border: 1px solid rgba(56, 68, 94, 0.2);
+}
+
+/* ================================
+   ANIMATIONS
+   ================================ */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 20px rgba(88, 166, 255, 0.05), 0 0 40px rgba(88, 166, 255, 0.02); }
+  50% { box-shadow: 0 0 30px rgba(88, 166, 255, 0.1), 0 0 60px rgba(88, 166, 255, 0.05); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes borderGlow {
+  0%, 100% { border-color: rgba(88, 166, 255, 0.2); }
+  50% { border-color: rgba(88, 166, 255, 0.5); }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes barGrow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-fade-in-scale {
+  animation: fadeInScale 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+
+.animate-border-glow {
+  animation: borderGlow 3s ease-in-out infinite;
+}
+
+.animate-gradient-shift {
+  background-size: 200% 200%;
+  animation: gradientShift 4s ease infinite;
+}
+
+.animate-count-up {
+  animation: countUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-bar-grow {
+  animation: barGrow 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transform-origin: left;
+}
+
+/* Stagger delays */
+.stagger-1 { animation-delay: 0.05s; opacity: 0; }
+.stagger-2 { animation-delay: 0.1s; opacity: 0; }
+.stagger-3 { animation-delay: 0.15s; opacity: 0; }
+.stagger-4 { animation-delay: 0.2s; opacity: 0; }
+.stagger-5 { animation-delay: 0.25s; opacity: 0; }
+.stagger-6 { animation-delay: 0.3s; opacity: 0; }
+
+/* ================================
+   SKELETON LOADING
+   ================================ */
+.skeleton {
+  background: linear-gradient(90deg, rgba(33, 38, 45, 0.5) 25%, rgba(56, 68, 94, 0.3) 50%, rgba(33, 38, 45, 0.5) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.8s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+/* ================================
+   CARDS
+   ================================ */
+.card-hover {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    0 0 30px rgba(88, 166, 255, 0.05);
+  border-color: rgba(88, 166, 255, 0.3);
+}
+
+.card-glow-blue {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card-glow-blue:hover {
+  box-shadow: 
+    0 0 30px rgba(88, 166, 255, 0.08),
+    0 20px 40px rgba(0, 0, 0, 0.25);
+  border-color: rgba(88, 166, 255, 0.4);
+}
+
+.card-glow-purple {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card-glow-purple:hover {
+  box-shadow: 
+    0 0 30px rgba(188, 140, 255, 0.08),
+    0 20px 40px rgba(0, 0, 0, 0.25);
+  border-color: rgba(188, 140, 255, 0.4);
+}
+
+/* ================================
+   WINNER BADGE
+   ================================ */
+.winner-badge {
+  background: linear-gradient(135deg, #238636, #3fb950);
+  box-shadow: 0 0 12px rgba(63, 185, 80, 0.3);
+  letter-spacing: 0.05em;
+}
+
+/* ================================
+   COMPARE BUTTON
+   ================================ */
+.compare-btn {
+  background: linear-gradient(135deg, #58a6ff 0%, #bc8cff 100%);
+  background-size: 200% 200%;
+  animation: gradientShift 4s ease infinite;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.compare-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent 50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.compare-btn:hover::before {
+  opacity: 1;
+}
+
+.compare-btn:hover {
+  box-shadow: 
+    0 0 30px rgba(88, 166, 255, 0.25),
+    0 0 60px rgba(188, 140, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+.compare-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.compare-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+/* ================================
+   INPUT FIELDS
+   ================================ */
+.search-input {
+  background: rgba(14, 20, 33, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(56, 68, 94, 0.4);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.search-input:focus {
+  border-color: rgba(88, 166, 255, 0.6);
+  box-shadow: 
+    0 0 0 3px rgba(88, 166, 255, 0.1),
+    0 0 20px rgba(88, 166, 255, 0.05);
+  background: rgba(14, 20, 33, 0.8);
+}
+
+.search-input-purple:focus {
+  border-color: rgba(188, 140, 255, 0.6);
+  box-shadow: 
+    0 0 0 3px rgba(188, 140, 255, 0.1),
+    0 0 20px rgba(188, 140, 255, 0.05);
+  background: rgba(14, 20, 33, 0.8);
+}
+
+/* ================================
+   INSTALL BUTTON
+   ================================ */
+.install-btn {
+  background: linear-gradient(135deg, #238636, #2ea043);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.install-btn:hover {
+  background: linear-gradient(135deg, #2ea043, #3fb950);
+  box-shadow: 0 0 20px rgba(63, 185, 80, 0.3);
+  transform: translateY(-1px);
+}
+
+/* ================================
+   PROGRESS BAR
+   ================================ */
+.progress-bar {
+  transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ================================
+   SECTION DIVIDER
+   ================================ */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(56, 68, 94, 0.4), transparent);
+  margin: 2rem 0;
+}
+
+/* ================================
+   VS BADGE
+   ================================ */
+.vs-badge {
+  background: linear-gradient(135deg, rgba(210, 153, 34, 0.15), rgba(210, 153, 34, 0.05));
+  border: 1px solid rgba(210, 153, 34, 0.3);
+  color: #d29922;
+  text-shadow: 0 0 20px rgba(210, 153, 34, 0.3);
+}
+
+/* ================================
+   STAT CARD
+   ================================ */
+.stat-card {
+  background: rgba(14, 20, 33, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(56, 68, 94, 0.3);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stat-card:hover {
+  background: rgba(14, 20, 33, 0.7);
+  border-color: rgba(56, 68, 94, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* ================================
+   AVATAR RING
+   ================================ */
+.avatar-ring-blue {
+  background: linear-gradient(135deg, #58a6ff, #79c0ff);
+  padding: 3px;
+  border-radius: 50%;
+}
+
+.avatar-ring-purple {
+  background: linear-gradient(135deg, #bc8cff, #d2a8ff);
+  padding: 3px;
+  border-radius: 50%;
+}
+
+/* ================================
+   HEADER LOGO ANIMATION
+   ================================ */
+.logo-icon {
+  background: linear-gradient(135deg, #58a6ff, #bc8cff);
+  animation: gradientShift 4s ease infinite;
+  background-size: 200% 200%;
+  transition: all 0.3s;
+}
+
+.logo-icon:hover {
+  box-shadow: 0 0 20px rgba(88, 166, 255, 0.3);
+  transform: rotate(180deg);
+}
+
+/* ================================
+   FEATURE TAG
+   ================================ */
+.feature-tag {
+  background: rgba(14, 20, 33, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(56, 68, 94, 0.3);
+  transition: all 0.3s;
+}
+
+.feature-tag:hover {
+  border-color: rgba(88, 166, 255, 0.3);
+  background: rgba(88, 166, 255, 0.05);
+  transform: translateY(-2px);
+}
+
+/* ================================
+   SCROLLBAR
+   ================================ */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(56, 68, 94, 0.5);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(56, 68, 94, 0.8);
+}
+
+/* ================================
+   RESPONSIVE GRID NOISE TEXTURE
+   ================================ */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.015;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
